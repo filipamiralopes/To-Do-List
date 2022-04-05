@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .serializers import TaskSerializer, UserSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions
+from .permissions import IsCreatorOrReadOnly
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -21,7 +22,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["status"]
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsCreatorOrReadOnly]
 
     def perform_create(self, serializer):
         """
