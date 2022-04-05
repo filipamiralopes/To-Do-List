@@ -6,9 +6,11 @@ URL Routing for the To-do List API.
             can be performed here.
 """
 
-from .views import TaskViewSet
+from .views import TaskViewSet, UserViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'tasks', TaskViewSet, basename='task')
+router.register(r'tasks', TaskViewSet, basename="task")
+router.register(r'users', UserViewSet, basename="users")
+
 urlpatterns = router.urls

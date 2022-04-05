@@ -11,6 +11,7 @@ class Task(models.Model):
 
     status = models.CharField(max_length=11, choices=STATUS_CHOICES, default=IN_PROGRESS)
     name = models.TextField()
+    creator = models.ForeignKey('auth.User', related_name='tasks', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

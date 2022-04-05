@@ -7,9 +7,20 @@ Using Django ModelSerializer to abstract way this complexity.
 
 from rest_framework import serializers
 from .models import Task
+from django.contrib.auth.models import User
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    creator = serializers.CharField(source="creator.username", read_only=True)
+
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = ["id", "status", "name", "creator"]
+
+
+class UserSerializer(serializers.ModelSerializer):
+    tasks = serializers.PrimaryKeyRelatedField(many=True, queryset=Task.objects.all())
+
+    class Meta:
+        model = User
+        fields = ["id", "username", "tasks"]
