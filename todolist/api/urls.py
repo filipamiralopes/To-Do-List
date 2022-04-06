@@ -9,8 +9,10 @@ URL Routing for the To-do List API.
 from .views import TaskViewSet, UserViewSet
 from rest_framework.routers import DefaultRouter
 
+app_name = 'api'
+
 router = DefaultRouter()
 router.register(r'tasks', TaskViewSet, basename="task")
-router.register(r'users', UserViewSet, basename="users")
+router.register(r'users', UserViewSet, basename="user")
 
 urlpatterns = router.urls

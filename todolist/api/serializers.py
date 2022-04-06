@@ -10,17 +10,26 @@ from .models import Task
 from django.contrib.auth.models import User
 
 
-class TaskSerializer(serializers.ModelSerializer):
-    creator = serializers.CharField(source="creator.username", read_only=True)
+class TaskSerializer(serializers.HyperlinkedModelSerializer):
+    creator = serializers.HyperlinkedRelatedField(view_name="api:user-detail", read_only=True)
 
     class Meta:
         model = Task
-        fields = ["id", "status", "name", "creator"]
+        fields = ["url", "id", "status", "name", "creator"]
+        extra_kwargs = {'url': {'view_name': 'api:task-detail'}}
 
 
-class UserSerializer(serializers.ModelSerializer):
-    tasks = serializers.PrimaryKeyRelatedField(many=True, queryset=Task.objects.all())
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    tasks = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ["id", "username", "tasks"]
+        fields = ["url", "id", "username", "email", "tasks"]
+        extra_kwargs = {'url': {'view_name': 'api:user-detail'}}
+
+    @staticmethod
+    def get_tasks(obj: User):
+        """
+        Return list of tasks' names.
+        """
+        return obj.tasks.values_list("name", flat=True)
