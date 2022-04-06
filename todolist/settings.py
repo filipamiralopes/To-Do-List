@@ -140,5 +140,5 @@ import django_heroku
 django_heroku.settings(locals())
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://middle-earth-to-do-list.herokuapp.com/'
+    'https://middle-earth-to-do-list.herokuapp.com'
 ]
