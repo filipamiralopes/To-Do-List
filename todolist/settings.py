@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", False)
@@ -86,9 +86,9 @@ WSGI_APPLICATION = 'todolist.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'todolist_db',
-        'USER': 'filipalopes',
-        'PASSWORD': 'todolist_pw',
+        'NAME': os.getenv('DATABASE_NAME', 'db_name'),
+        'USER': os.getenv('DATABASE_USER', 'db_user'),
+        'PASSWORD': os.getenv('DATABASE_PW', 'db_pw'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
