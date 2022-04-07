@@ -34,8 +34,8 @@ class TaskTestCase(base_test.NewUserTestCase):
             data={"name": "Train more orcs"},
             format="json",
         )
-        task = Task.objects.first()
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        task = Task.objects.first()
         self.assertEqual(response.data["id"], task.id)
         # Check task is created with default status
         self.assertEqual(response.data["status"], "IN_PROGRESS")
