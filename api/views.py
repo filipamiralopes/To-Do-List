@@ -1,4 +1,11 @@
-"""This file contains the endpoints of the To-do list app."""
+"""
+This file contains the endpoints of the To-do list app.
+
+Django ViewSet is a useful abstraction that automatically provides `list`,
+    `create`, `retrieve`, `update` and `destroy` actions.
+
+Note: using viewsets is less explicit than building the views individually.
+"""
 
 from rest_framework import viewsets
 from .models import Task
@@ -11,12 +18,10 @@ from .permissions import IsCreatorOrReadOnly
 
 class TaskViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows tasks to be viewed, added, edited and deleted.
-
-    Django ViewSet is a useful abstraction that automatically provides `list`,
-    `create`, `retrieve`, `update` and `destroy` actions.
-
-    Note: using viewsets is less explicit than building the views individually.
+    Here are the Middle Earth tasks.
+    You can view and filter them by status "In-progress" and "Completed".
+    To be able to add a task (from the Task List), you must be part of this mythic world (aka login).
+    Only the creator of the task is able to delete or update its task (by following the task url), otherwise the Ring would never be destroyed.
     """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
@@ -34,7 +39,9 @@ class TaskViewSet(viewsets.ModelViewSet):
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    This viewset automatically provides `list` and `retrieve` actions for user instances.
+    Here are the inhabitants (aka users) of the Middle Earth.
+    You can list them (and check their burdens too, aka tasks) and retrieve one of them by following the url.
+    And that's it. Only a powerful Admin (yes, more powerful than Sauron itself) can change or delete inhabitants.
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
