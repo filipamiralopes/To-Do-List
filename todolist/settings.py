@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv("DEBUG", False)
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',
@@ -142,3 +142,5 @@ django_heroku.settings(locals())
 CSRF_TRUSTED_ORIGINS = [
     'https://middle-earth-to-do-list.herokuapp.com'
 ]
+
+DJANGO_SETTINGS_MODULE = 'todolist.settings'
