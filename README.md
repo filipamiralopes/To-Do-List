@@ -50,3 +50,8 @@ And navigate into: http://127.0.0.1:8000/
 
 Go to this route and add the credentials you did while creating superuser:
 http://127.0.0.1:8000/admin/
+
+In order to run tests, run the following command within the project folder:\
+`python manage.py test api.tests`\
+or for a specific set of tests:\
+`python manage.py test api.tests.test_tasks`
