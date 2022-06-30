@@ -1,6 +1,6 @@
 <img src="https://www.devopsgroup.com/wp-content/uploads/2019/05/devopsgroup_devops_playbook_one_ring_001-03.svg" alt="Ring One" width="100"/>
 
-# ToDoList
+# To-do List
 
 Live here: https://middle-earth-to-do-list.herokuapp.com/ 
 
